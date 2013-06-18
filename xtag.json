@@ -1,11 +1,11 @@
 {
 	"name": "Input",
 	"tagName": "x-input",
-	"version": "0.1.0",
-	"author": "you",
+	"version": "0.1.1",
+	"author": "Daniel Buchner",
 	"description": "",
-	"demo": "demo/demo.html",
-	"categories": [],
+	"demo": "demo/index.html",
+	"categories": ["input"],
 	"compatibility": {
 		"firefox": 5,
 		"chrome": 4,
