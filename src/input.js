@@ -1,10 +1,21 @@
 (function(){
+
+  var frag = xtag.createFragment(function(){/*
+    <div class="x-input-text">
+      <input />
+      <div class="x-input-spinner">
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+      </div>
+    </div>
+    <button class="x-input-clear"></button>
+  */});
   
   xtag.register('x-input', {
     lifecycle: {
       created: function(){
-        var input = this.xtag.input = this.appendChild(document.createElement('input'));
-        input.className = 'x-input-text';
+        var content = frag.cloneNode(true);
+        this.xtag.input = content.querySelector('.x-input-text input');
+        this.appendChild(content);
       }
     },
     methods: {
@@ -14,37 +25,50 @@
       blur: function(){
         this.xtag.input.blur();
       },
-      clear: function(){
+      clear: function(focus){
         this.value = '';
-        this.xtag.input.focus();
-        this.removeAttribute('loading');
+        if (focus) this.xtag.input.focus();
+        this.spinning = false;
         xtag.fireEvent(this, 'clear');
-        xtag.fireEvent(this.xtag.input, 'change');
       }
     },
     events:{
-      'focus:delegate(.x-input-text)': function(e){
-        this.parentNode.setAttribute('focus', '');
+      'focus:delegate(.x-input-text input)': function(e){
+        e.currentTarget.setAttribute('focus', '');
       },
-      'blur:delegate(.x-input-text)': function(e){
-        this.parentNode.removeAttribute('focus');
+      'blur:delegate(.x-input-text input)': function(e){
+        e.currentTarget.removeAttribute('focus');
       },
-      'tap:delegate([input-clear])': function(e){
-        this.parentNode.clear();
+      'tap:delegate(.x-input-clear)': function(e){
+        this.parentNode.clear(true);
       },
-      'change:delegate(.x-input-text)': function(e){
-        this.parentNode.value = this.value;
+      'keyup:delegate(.x-input-clear)': function(e){
+        if (e.keyCode == 32) this.parentNode.clear();
       },
-      'keypress': function(e){
-        switch(e.keyCode) {
+      'input:delegate(.x-input-text input)': function(e){
+        e.currentTarget.value = e.target.value;
+      },
+      'keydown:delegate(.x-input-text input)': function(e){
+        var node = e.currentTarget;
+        switch (e.keyCode) {
+          case 8:
+            node.spinning = false;
+            break;
           case 13:
-            if (this.autospin) {
-              
+            if (node.autospin && node.value.length >= node.minlength) {
+              node.spinning = true;
+              xtag.fireEvent(node, 'submitready');
             }
             break;
           case 27:
-            this.clear();
+            node.clear(true);
             break;
+        }
+      },
+      'transitionend:delegate(.x-input-spinner img)': function(e){
+        var node = e.currentTarget;
+        if (e.propertyName == 'opacity' && !node.hasAttribute('spinning')) {
+          node.removeAttribute('x-input-spinning');
         }
       }
     },
@@ -52,8 +76,11 @@
       autospin: {
         attribute: { boolean: true }
       },
-      loading: {
-        attribute: { boolean: true }
+      spinning: {
+        attribute: { boolean: true },
+        set: function(value){
+          if (value) this.setAttribute('x-input-spinning', '');
+        }
       },
       name: {
         attribute: { property: 'input' }
@@ -79,25 +106,19 @@
           property: 'input'
         }
       },
-      minChar: {
+      minlength: {
         attribute: {},
-        set: function(value){
-          this.setAttribute('min-char', this.xtag.minChar = Number(value) || 0);
+        get: function(value){
+          return Number(this.getAttribute('minlength'));
         }
       },
       value: {
         attribute: {},
         get: function(){
-          return this.xtag.input.value;
+          return this.xtag.input.value || '';
         },
         set: function(value){
           this.xtag.input.value = value;
-        }
-      },
-      controlElements: {
-        writeable: false,
-        get: function(){
-          return xtag.queryChildren(this, '*:not(input)');
         }
       }
     }
