@@ -25,7 +25,7 @@
 <body>
 
 	<label for="foo">Foo Input</label>
-	<x-input id="test" name="foo" minlength="4" autocomplete autofocus autospin>
+	<x-input id="test" name="foo" validate="^ *(\S *){3,}$" autocomplete autofocus autospin>
 		<button>add</button>
 	</x-input>
 	

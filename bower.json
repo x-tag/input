@@ -11,6 +11,7 @@
     "src/input.css"
   ],
   "dependencies": {
-    "x-tag-core": "*"
+    "x-tag-core": "*",
+    "x-tag-mixin-value": "*"
   }
 }

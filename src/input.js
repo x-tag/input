@@ -11,6 +11,7 @@
   */});
   
   xtag.register('x-input', {
+    mixins: ['value'],
     lifecycle: {
       created: function(){
         var content = frag.cloneNode(true);
@@ -24,6 +25,12 @@
       },
       blur: function(){
         this.xtag.input.blur();
+      },
+      submit: function(){
+        if (this.isValid()){
+          if (this.autospin) this.spinning = true;
+          xtag.fireEvent(this, 'submitready');
+        }
       },
       clear: function(focus){
         this.value = '';
@@ -51,17 +58,11 @@
       'keydown:delegate(.x-input-text input)': function(e){
         var node = e.currentTarget;
         switch (e.keyCode) {
-          case 8:
-            node.spinning = false;
+          case 8: node.spinning = false;
             break;
-          case 13:
-            if (node.autospin && node.value.length >= node.minlength) {
-              node.spinning = true;
-              xtag.fireEvent(node, 'submitready');
-            }
+          case 13: node.submit();
             break;
-          case 27:
-            node.clear(true);
+          case 27: node.clear(true);
             break;
         }
       },
@@ -85,9 +86,6 @@
       name: {
         attribute: { property: 'input' }
       },
-      maxlength: {
-        attribute: { property: 'input' }
-      },
       placeholder: {
         attribute: { property: 'input' }
       },
@@ -104,21 +102,6 @@
         attribute: {
           boolean: true,
           property: 'input'
-        }
-      },
-      minlength: {
-        attribute: {},
-        get: function(value){
-          return Number(this.getAttribute('minlength'));
-        }
-      },
-      value: {
-        attribute: {},
-        get: function(){
-          return this.xtag.input.value || '';
-        },
-        set: function(value){
-          this.xtag.input.value = value;
         }
       }
     }
