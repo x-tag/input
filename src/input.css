@@ -104,6 +104,10 @@ x-input .x-input-text input {
 	box-sizing: border-box;
 }
 
+x-input .x-input-text input::-ms-clear {
+  display: none;
+}
+
 x-input .x-input-spinner {
   position: absolute;
   top: 0;
