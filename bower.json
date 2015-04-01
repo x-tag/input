@@ -12,6 +12,7 @@
   ],
   "dependencies": {
     "x-tag-core": "*",
-    "x-tag-mixin-value": "*"
+    "x-tag-mixin-value": "*",
+    "x-tag-spinner": "*"
   }
 }

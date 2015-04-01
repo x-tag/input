@@ -3,9 +3,7 @@
   var frag = xtag.createFragment(function(){/*
     <div class="x-input-text">
       <input />
-      <div class="x-input-spinner">
-        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
-      </div>
+      <x-spinner fade></x-spinner>
     </div>
     <button class="x-input-clear"></button>
   */});
@@ -16,6 +14,7 @@
       created: function(){
         var content = frag.cloneNode(true);
         this.xtag.input = content.querySelector('.x-input-text input');
+        this.xtag.spinner = content.querySelector('x-spinner');
         this.appendChild(content);
       }
     },
@@ -65,12 +64,6 @@
           case 27: node.clear(true);
             break;
         }
-      },
-      'transitionend:delegate(.x-input-spinner img)': function(e){
-        var node = e.currentTarget;
-        if (e.propertyName == 'opacity' && !node.hasAttribute('spinning')) {
-          node.removeAttribute('x-input-spinning');
-        }
       }
     },
     accessors: {
@@ -78,10 +71,7 @@
         attribute: { boolean: true }
       },
       spinning: {
-        attribute: { boolean: true },
-        set: function(value){
-          if (value) this.setAttribute('x-input-spinning', '');
-        }
+        attribute: { boolean: true, property: 'spinner' }
       },
       name: {
         attribute: { property: 'input' }
