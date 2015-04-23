@@ -72,7 +72,7 @@ x-input > [position="left"] {
 
 x-input .x-input-text {
   position: relative;
-  height: 100%;
+  min-height: 100%;
 	-webkit-box-flex: 1;
 	-moz-box-flex: 1;
 	-webkit-flex: 1;
