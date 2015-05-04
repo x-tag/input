@@ -39,9 +39,6 @@
       }
     },
     events:{
-      tap: function(e){
-        if (e.target == this) this.focus();
-      },
       'focus:delegate(.x-input-text input)': function(e){
         e.currentTarget.setAttribute('focus', '');
       },
