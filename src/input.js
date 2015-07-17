@@ -1,21 +1,18 @@
 (function(){
 
-  var frag = xtag.createFragment(function(){/*
-    <div class="x-input-text">
-      <input />
-      <x-spinner fade></x-spinner>
-    </div>
-    <button class="x-input-clear"></button>
-  */});
-  
   xtag.register('x-input', {
     mixins: ['value'],
+    content: function(){/*
+      <div class="x-input-text">
+        <input />
+        <x-spinner fade></x-spinner>
+      </div>
+      <button class="x-input-clear"></button>
+    */},
     lifecycle: {
       created: function(){
-        var content = frag.cloneNode(true);
-        this.xtag.input = content.querySelector('.x-input-text input');
-        this.xtag.spinner = content.querySelector('x-spinner');
-        this.appendChild(content);
+        this.xtag.input = this.querySelector('.x-input-text input');
+        this.xtag.spinner = this.querySelector('x-spinner');
       }
     },
     methods: {
