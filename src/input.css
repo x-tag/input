@@ -116,6 +116,10 @@ x-input .x-input-text x-spinner {
 	box-sizing: border-box;
 }
 
+x-input .x-input-text x-spinner svg {
+    height: 0.6em;
+}
+
 x-input .x-input-clear {
   -webkit-box-ordinal-group: 3;
 	-moz-box-ordinal-group: 3;
