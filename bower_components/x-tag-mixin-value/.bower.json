@@ -1,0 +1,24 @@
+{
+  "name": "x-tag-mixin-value",
+  "description": "Adds a value and validate properties, along with the validation method isValid",
+  "keywords": [
+    "web-components",
+    "x-tag"
+  ],
+  "main": [
+    "src/main.js"
+  ],
+  "dependencies": {
+    "x-tag-core": "*"
+  },
+  "homepage": "https://github.com/x-tag/mixin-value",
+  "_release": "f7caeda4ea",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "f7caeda4ea4e960eb692c88bd395645d467e1aa4"
+  },
+  "_source": "git://github.com/x-tag/mixin-value.git",
+  "_target": "*",
+  "_originalSource": "x-tag-mixin-value"
+}
