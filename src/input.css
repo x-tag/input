@@ -21,12 +21,11 @@ x-input > *:not(.x-input-text) {
   position: relative;
 	min-width: 1em;
   margin: 0.15em;
-	padding: 0.15em;
+	padding: 0.3em;
 	font-size: 85%;
 	background: none;
 	border: 1px solid transparent;
 	color: #000;
-  line-height: 124%;
 	text-align: center;
 	opacity: 0.4;
   z-index: 1;
@@ -35,14 +34,14 @@ x-input > *:not(.x-input-text) {
 	-ms-flex-order: 3;
 	-webkit-order: 3;
 	order: 3;
-	-webkit-transition: border-color 0.3s, -webkit-box-shadow 0.075s, opacity 0.15s;
-	-moz-transition: border-color 0.3s, -moz-box-shadow 0.075s, opacity 0.15s;
-	-ms-transition: border-color 0.3s, -ms-box-shadow 0.075s, opacity 0.15s;
-	transition: border-color 0.3s, box-shadow 0.075s, opacity 0.2s;
+	-webkit-transition: opacity 0.15s;
+	-moz-transition: opacity 0.15s;
+	-ms-transition: opacity 0.15s;
+	transition: opacity 0.2s;
 }
 
 	x-input > *:not(.x-input-text):hover {
-		border-color: #000;
+		border-color: rgba(0,0,0,0.5);
 		opacity: 0.6;
 	}
 
@@ -129,5 +128,5 @@ x-input .x-input-clear {
 }
 
 x-input .x-input-clear:before {
-  content: "\2A2F";
+  content: "×";
 }
