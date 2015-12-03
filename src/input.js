@@ -1,7 +1,7 @@
 (function(){
 
   xtag.register('x-input', {
-    mixins: ['value'],
+    mixins: ['input'],
     content: function(){/*
       <div class="x-input-text">
         <input />
@@ -11,7 +11,6 @@
     */},
     lifecycle: {
       created: function(){
-        this.xtag.input = this.querySelector('.x-input-text input');
         this.xtag.spinner = this.querySelector('x-spinner');
       }
     },
@@ -69,9 +68,6 @@
       },
       spinning: {
         attribute: { boolean: true, property: 'spinner' }
-      },
-      name: {
-        attribute: { property: 'input' }
       },
       placeholder: {
         attribute: { property: 'input' }

@@ -1,5 +1,5 @@
 
-x-spinner, x-spinner img {
+x-spinner {
   -webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-ms-box-sizing: border-box;
@@ -7,22 +7,10 @@ x-spinner, x-spinner img {
 }
 
 x-spinner {
-  display: -webkit-box;      
-	display: -moz-box;         
-	display: -ms-flexbox;      
-	display: -webkit-flex;     
-	display: flex;
-  -webkit-box-pack: center;
-  -moz-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -moz-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
+  display: table;
   text-align: center;
+  color: #000;
+  stroke: #000;
 }
 
 x-spinner[fade] {
@@ -33,8 +21,24 @@ x-spinner[fade] {
 	transition: opacity 0.6s;
 }
 
-x-spinner[fade][spinning] {
+x-spinner[transition="fade-in"] {
   opacity: 1;
+  display: table;
+}
+
+x-spinner[transition="fade-out"] {
+  opacity: 0;
+  display: none;
+}
+
+x-spinner[transitioning] {
+  display: table;
+}
+
+x-spinner .x-spinner-center {
+  display: table-cell;
+  vertical-align: middle;
+
 }
 
 x-spinner .x-spinner-center[label]:after {
@@ -42,29 +46,20 @@ x-spinner .x-spinner-center[label]:after {
   content: attr(label);
 }
 
-x-spinner img {
+x-spinner svg {
   display: block;
   width: 1em;
-  height: auto;
+  height: 1em;
   margin: 0 auto;
-  border-radius: 50%;
-  border: 3px solid;
-  border-color: transparent;
-  border-left-color: inherit;
-  border-right-color: inherit;
-  -webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-ms-box-sizing: border-box;
-	box-sizing: border-box;
 }
 
-x-spinner[x-spinner-spinning] img {
+x-spinner[spinning] svg, x-spinner[transitioning] svg {
   -webkit-animation: x-spinner-rotate 1s infinite linear;
   -ms-animation: x-spinner-rotate 1s infinite linear;
   animation: x-spinner-rotate 1s infinite linear;
 }
 
-x-spinner[reverse] img {
+x-spinner[reverse] svg {
   -webkit-animation-direction: reverse;
   -ms-animation-direction: reverse;
   animation-direction: reverse;
