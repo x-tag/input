@@ -7,7 +7,7 @@
         <input />
         <x-spinner fade></x-spinner>
       </div>
-      <button class="x-input-clear"></button>
+      <button class="x-input-clear" tabindex="-1"></button>
     */},
     lifecycle: {
       created: function(){
@@ -26,6 +26,7 @@
           if (this.autospin) this.spinning = true;
           xtag.fireEvent(this, 'submitready');
         }
+        else xtag.fireEvent(this, 'invalid');
       },
       clear: function(focus){
         this.value = '';
