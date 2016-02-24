@@ -27,6 +27,7 @@ x-input > *:not(.x-input-text) {
 	border: 1px solid transparent;
 	color: #000;
 	text-align: center;
+  line-height: 1em;
 	opacity: 0.4;
   z-index: 1;
 	-webkit-box-ordinal-group: 3;
