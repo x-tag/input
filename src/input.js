@@ -48,9 +48,6 @@
       'keyup:delegate(.x-input-clear)': function(e){
         if (e.keyCode == 32) this.parentNode.clear();
       },
-      'input:delegate(.x-input-text input)': function(e){
-        e.currentTarget.value = e.target.value;
-      },
       'keydown:delegate(.x-input-text input)': function(e){
         var node = e.currentTarget;
         switch (e.keyCode) {
